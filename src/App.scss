@@ -1,0 +1,37 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 90vh;
+  justify-content: center;
+  align-items: center;
+}
+
+#prayer-times {
+  background: rgba(0, 0, 0, 0.198);
+  border-radius: 20px;
+  margin: 0 10px;
+  padding: 0 10px;
+
+  .prayer-times-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    div {
+      width: 100px;
+      padding: 10px 0;
+    }
+
+    .prayer-times-item-name {
+      text-align: start;
+    }
+
+    .prayer-times-item-alert {
+      text-align: center;
+    }
+
+    .prayer-times-item-time {
+      text-align: end;
+    }
+  }
+}
