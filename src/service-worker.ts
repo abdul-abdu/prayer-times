@@ -78,11 +78,17 @@ self.addEventListener("message", (event) => {
   }
 });
 
-// const assets = ["index.scss", "App.scss"];
-
-// // Any other custom service worker logic can go here.
-// self.addEventListener("install", () => {
-//   caches.open("assets").then((cache) => {
-//     cache.addAll(assets);
-//   });
-// });
+// Any other custom service worker logic can go here.
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches
+      .match(event.request) // search in the cache
+      .then((response) => {
+        if (response) {
+          return response;
+        } else {
+          return fetch(event.request);
+        }
+      })
+  );
+});
