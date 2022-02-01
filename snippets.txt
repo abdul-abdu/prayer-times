@@ -20,6 +20,8 @@ self.addEventListener("install", event => {
     // self.skipWaiting(); // activate the service worker immediately
 });
 
+
+
 // Cache first strategy
 self.addEventListener("fetch", event => {
     event.respondWith(
