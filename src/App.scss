@@ -1,41 +1,11 @@
-.App {
-  display: flex;
-  flex-direction: column;
-  min-height: 90vh;
-  justify-content: center;
-  align-items: center;
+body {
+  max-height: 100vh;
 }
 
-#prayer-times {
-  background: rgba(0, 0, 0, 0.198);
-  border-radius: 20px;
-  margin: 0 10px;
-  padding: 0 10px;
+$primary-color: #00000069;
 
-  .prayer-times-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    div {
-      width: 100px;
-      padding: 10px 0;
-    }
-
-    .prayer-times-item-name {
-      text-align: start;
-    }
-
-    .prayer-times-item-alert {
-      text-align: center;
-
-      img {
-        width: 20px;
-      }
-    }
-
-    .prayer-times-item-time {
-      text-align: end;
-    }
-  }
+.App {
+  height: 100vh;
+  color: white;
+  background-color: $primary-color;
 }

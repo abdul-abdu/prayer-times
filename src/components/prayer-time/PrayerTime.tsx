@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
+import "./prayer-time.scss";
 
 type Ptops = {
   name: string;
   time: Date;
 };
 
-export const PUBLIC = process.env.PUBLIC_URL;
+export const PUBLIC_URL = process.env.PUBLIC_URL;
+console.log("PUBLIC", PUBLIC_URL);
 
 export default function PrayerTime({ name, time }: Ptops) {
-  const [volumeEnabled, setVolumeEnabled] = useState(
-    JSON.parse(localStorage.getItem(name) || "") || false
-  );
+  const [volumeEnabled, setVolumeEnabled] = useState(false);
 
   useEffect(() => {
     localStorage.setItem(name, JSON.stringify(volumeEnabled));
@@ -24,7 +24,7 @@ export default function PrayerTime({ name, time }: Ptops) {
         onClick={() => setVolumeEnabled(!volumeEnabled)}
       >
         <img
-          src={`${PUBLIC}/${volumeEnabled ? "bell.png" : "silence.png"}`}
+          src={`${PUBLIC_URL}/${volumeEnabled ? "bell.png" : "silence.png"}`}
           alt={`icon-${volumeEnabled ? "bell" : "silence"}`}
         />
       </div>

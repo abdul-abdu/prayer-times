@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import "./App.scss";
-import PrayerTime from "./components/PrayerTime";
-// import { getJson } from "./http";
+import PrayerTime from "./components/prayer-time/PrayerTime";
+import UpcomingPrayer from "./components/upcoming-prayer";
+import { LS_KEYS } from "./enums";
+import { getJson } from "./http";
+import { parseGeoLocation } from "./utils";
 
 const Times = [
   { name: "bomdod", time: new Date() },
@@ -15,10 +18,14 @@ function App() {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (t) => {
-          console.log(t);
-          
-        
+        (geoLocation) => {
+          const location = parseGeoLocation(geoLocation);
+
+          localStorage.setItem(LS_KEYS.LOCATION, JSON.stringify(location));
+          console.log(
+            "location",
+            JSON.parse(localStorage.getItem(LS_KEYS.LOCATION) || "{}")
+          );
         },
         (e) => {
           console.log(e);
@@ -26,35 +33,17 @@ function App() {
       );
     }
   }, []);
-  // useEffect(() => {
-  //   const subscriptoin = getJson(
-  //     "39.81666564941406",
-  //     "21.416667938232425",
-  //     "elevation",
-  //     "2022-01"
-  //   ).subscribe({
-  //     next: (data) => {
-  //       console.log(data);
-  //     },
-  //     error: (e) => {
-  //       console.log(e);
-  //     },
-  //     complete: () => console.log("complete"),
-  //   });
-
-  //   return () => {
-  //     subscriptoin.unsubscribe();
-  //   };
-  // }, []);
 
   return (
     <div className="App">
-      Prayer time
-      <section id="prayer-times">
-        {Times.map((t) => (
-          <PrayerTime name={t.name} time={t.time} key={t.name} />
-        ))}
-      </section>
+      <div className="container">
+        <UpcomingPrayer />
+        <section id="prayer-times">
+          {Times.map((t) => (
+            <PrayerTime name={t.name} time={t.time} key={t.name} />
+          ))}
+        </section>
+      </div>
     </div>
   );
 }
